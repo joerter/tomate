@@ -11,25 +11,30 @@
 
 (def router
   (reitit/router
-   [["/" :index]
-    ]))
+   [["/" :index]]))
 
 (defn home-page []
   (let [is-timer (atom false)
         the-goal (atom "Fix the bugs!!")]
-    (fn [] (if @is-timer (goal-timer the-goal) (goal-input the-goal is-timer)))))
+    (fn []
+      [:div.home-page.container.d-flex.p-3.mx-auto.flex-column.text-center
+       [:header.mb-auto.d-flex.justify-content-between
+        [:h3.masthead-brand "Tomate"]
+        [:nav.nav.nav-masthead.justify-content-center]]
+       [:main.inner.cover.flex-1 {:role "main"}
+        (if @is-timer (goal-timer the-goal) (goal-input the-goal is-timer))]
+       [:footer.mastfoot.mt-auto
+        [:p "Created by John Oerter"]]])))
 
 (defn page-for [route]
   (case route
-    :index #'home-page
-    ))
+    :index #'home-page))
 
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))]
       [:div
-       [page]
-       ])))
+       [page]])))
 
 (defn mount-root []
   (rdom/render [current-page] (.getElementById js/document "app")))

@@ -1,8 +1,7 @@
 (ns tomate.goal-input)
 
 (defn goal-input [the-goal is-timer]
-  [:div.main
-   [:h1 "Welcome to tomate"]
+  [:div.goal-input
    [:input {:type "text"
             :placeholder "What are you going to do?"
             :autoFocus true
