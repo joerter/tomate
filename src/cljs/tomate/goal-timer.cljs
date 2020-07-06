@@ -13,8 +13,8 @@
 
 (defn goal-timer [the-goal]
   (let [total-seconds (atom 1500)]
-   (fn []
-     (js/setTimeout #(swap! total-seconds dec) 1000)
-     [:div.timer
-      [:h1 @the-goal]
-      [:h1 (seconds->time @total-seconds)]])))
+    (fn []
+      (js/setTimeout #(swap! total-seconds dec) 1000)
+      [:div.timer
+       [:h1 @the-goal]
+       [:h1 (seconds->time @total-seconds)]])))

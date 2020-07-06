@@ -22,7 +22,7 @@
         [:h3.masthead-brand "Tomate"]
         [:nav.nav.nav-masthead.justify-content-center]]
        [:main.inner.cover.flex-1 {:role "main"}
-        (if @is-timer (goal-timer the-goal) (goal-input the-goal is-timer))]
+        (if @is-timer [goal-timer the-goal] [goal-input the-goal is-timer])]
        [:footer.mastfoot.mt-auto
         [:p "Created by John Oerter"]]])))
 
