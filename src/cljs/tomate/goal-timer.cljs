@@ -6,7 +6,7 @@
   (.padStart (str (js/Math.floor (/ milliseconds 60000))) 2 "0"))
 
 (defn get-seconds [milliseconds]
-  (.padStart (str (mod milliseconds 60000)) 2 "0"))
+  (.padStart (str (js/Math.round (/ (mod milliseconds 60000) 1000))) 2 "0"))
 
 (defn milliseconds->time [total-milliseconds]
   (str (get-minutes total-milliseconds) ":" (get-seconds total-milliseconds)))
@@ -20,7 +20,6 @@
 (defn goal-timer [the-goal]
   (let [total-milliseconds (atom 1500000) end-time (get-end-time)]
     (fn []
-      ;; (js/console.log "seconds from end time:" (seconds-from-end-time end-time))
       (js/setTimeout #(reset! total-milliseconds (milliseconds-from-end-time end-time)) 1000)
       [:div.timer
        [:h1 @the-goal]
